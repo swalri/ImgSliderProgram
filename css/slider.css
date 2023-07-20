@@ -1,0 +1,64 @@
+/* 전체지정 */
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+/* li기본지정 */
+li {
+    list-style: none;
+}
+
+/* 실질적으로 보여지는 div
+    실제 html에 보이게 하는 div
+*/
+.slide_wrapper {
+    position: relative;
+    width: 540px;
+    margin: 50px auto;
+    height: 100px;
+    overflow: hidden;
+}
+
+/* ul태그로 처음 위치를 고정시켜 놓아야 움직임을 줄수있다*/
+.slides {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+/* 동적움직임을 주는 코드로 일부러 클래스를 하나 추가시켜준다 js파일을 봐라 */
+.slides.animated {
+    transition: 0.5s ease-out;
+}
+
+/*마지막을 제외한 모든 li태그*/
+.slides li:not(:last-child) {
+    float: left;
+    margin-right: 10px;
+}
+
+/* 움직임 조종하는 태그를 감싸는 태그
+    위치만 조정하였을 뿐이다
+*/
+.controls {
+    text-align: center;
+}
+
+/* 움직임을 조종하는 태그의 css */
+.controls span {
+    background: #333;
+    color: #fff;
+    padding: 10px 20px;
+    margin: 0px 10px;
+}
+
+/* 이전으로 가는 태그의 css 위치만 조정함 */
+.controls span.prev {
+    right: calc(100%+50px);
+}
+
+/* 이후로 가는 태그의 css 위치만 조정함 */
+.controls span.next {
+    left: calc(100%+50px);
+}
