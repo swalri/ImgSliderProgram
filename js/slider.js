@@ -5,7 +5,8 @@ let slides = document.querySelector('.slides'), //ul태그
     slideCount = slide.length,//슬라이드 개수
     slideWidth = 100, //슬라이드 넓이
     slideMargin = 10, //슬라이드 margin
-    prevBtn = document.querySelector('.prev'),//이전버튼
+    slideEventLocked = false;//이벤트 중복방지
+prevBtn = document.querySelector('.prev'),//이전버튼
     nextBtn = document.querySelector('.next');//다음버튼
 
 //동작 시작
@@ -46,26 +47,35 @@ function setInitialPos() {
 }
 
 //이벤트
-
+/**이후페이지 */
 nextBtn.addEventListener('click', function () {
     moveSlide(currentIndex + 1);
 });
+/**이전페이지 */
 prevBtn.addEventListener('click', function () {
     moveSlide(currentIndex - 1);
 });
+/**양쪽끝으로 이동시 */
 function moveSlide(num) {
-    slides.style.left = -num * (slideWidth + slideMargin) + 'px';//위치지정
-    currentIndex = num;
-    if (currentIndex == slideCount || currentIndex == -slideCount) {
-        setTimeout(() => {
-            slides.classList.remove('animated');
-            slides.style.left = '0px';
-            currentIndex = 0;
-        }, 500);
+    if (!slideEventLocked) {
+        slides.style.left = -num * (slideWidth + slideMargin) + 'px';//위치지정
+        currentIndex = num;
+        slideEventLocked = true;
 
+        if (currentIndex == slideCount || currentIndex == -slideCount) {
+            setTimeout(() => {
+                slides.classList.remove('animated');
+                slides.style.left = '0px';
+                currentIndex = 0;
+            }, 500);
+
+            setTimeout(() => {
+                slides.classList.add('animated');
+            }, 550);
+        }
         setTimeout(() => {
-            slides.classList.add('animated');
-        }, 550);
+            slideEventLocked = false;
+        }, 500);
+        console.log(currentIndex, slideCount);
     }
-    console.log(currentIndex, slideCount);
 }
