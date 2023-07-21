@@ -61,7 +61,7 @@ function moveSlide(num) {
         slides.style.left = -num * (slideWidth + slideMargin) + 'px';//위치지정
         currentIndex = num;
         slideEventLocked = true;
-
+        // 양쪽 끝일경우
         if (currentIndex == slideCount || currentIndex == -slideCount) {
             setTimeout(() => {
                 slides.classList.remove('animated');
