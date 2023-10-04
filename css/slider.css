@@ -9,6 +9,11 @@ li {
     list-style: none;
 }
 
+img {
+    width: 100px;
+    height: 100px;
+}
+
 /* 실질적으로 보여지는 div
     실제 html에 보이게 하는 div
 */
